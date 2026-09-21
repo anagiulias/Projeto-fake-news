@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Verificador de Fake News de Esportes",
+  "version": "1.0",
+  "description": "Verifica a veracidade de notícias esportivas brasileiras usando IA.",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://localhost:8000/*" 
+  ],
+  "action": {
+    "default_popup": "index.html"
+  }
+}
