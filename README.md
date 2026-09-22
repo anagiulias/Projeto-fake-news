@@ -111,3 +111,4 @@ O servidor deve continuar em execução durante o uso da extensão.
 - Adicionar suporte a mais navegadores
 - Melhorar a interface visual da extensão
 - Testar em redes sociais
+- Adicionar filtro de palavras nos textos capturados.
