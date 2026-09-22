@@ -1,5 +1,4 @@
-Adicione a imagem de capa com o tema do seu projeto:
-![Thumbnail GitHub]( )
+![Thumbnail GitHub](https://blog.samisaude.com.br/wp-content/uploads/2021/03/saude_fake_news.jpg)
 
 ## Projeto - Identificador de Notícias Falsas
 Um sistema inteligente que auxilia na verificação de notícias online, detectando se um texto é falso ou verdadeiro por meio de processamento linguistico e análise semântica. O projeto combina uma extensão de navegador com uma API em Python e um banco vetorial para realizar a análise do conteúdo.
