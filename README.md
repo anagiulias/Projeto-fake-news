@@ -1,114 +1,154 @@
-![Thumbnail GitHub](https://blog.samisaude.com.br/wp-content/uploads/2021/03/saude_fake_news.jpg)
+# Verificador de Notícias
 
-## Identificador de Notícias Falsas - Front-end
-Um sistema inteligente que auxilia na verificação de notícias online, detectando se um texto é falso ou verdadeiro por meio de processamento linguístico e análise semântica. O projeto combina uma extensão de navegador, uma API em Python e um banco vetorial para realizar a análise do conteúdo.
+Projeto experimental com uma extensão Chrome e uma API Python local. A
+extensão captura uma notícia e o backend combina:
 
-## Visão Geral
-Este projeto foi desenvolvimento para analisar notícias acessadas pelo usuários diretamente no navegador. A extensão coleta o título e o corpo da notícia, envia os dados para o back-end, que compara o texto com uma base vetorial treinada e retorna um resultado com a classificação da notícia.
+1. **Classificador supervisionado local**, treinado com os arquivos TXT rotulados das
+   pastas `datasets/fake/` e `datasets/true/`;
+2. **Google Fact Check Tools API opcional**, para buscar checagens já publicadas
+   por organizações de fact-checking;
+3. **Resumo da notícia local opcional via Ollama**, que descreve a alegação sem decidir se
+   é verdadeira ou falsa.
 
-A proposta central é oferecer uma ferramenta prática, simples e eficieinte para ajudar os usuários na identificação de conteúdos duvidosos antes de compartilharem possíveis informações falsas.
+As saídas são pistas para estudo, não confirmação factual. A previsão local é
+binária e pode ser inconclusiva; ratings parciais do Google são apresentados
+como publicados, sem serem convertidos em rótulos locais.
 
-## Fluxo de Funcionamento
-<details>
-  <summary><b>Fluxo de aplicação:<b/></summary>
-     1. O usuário abre uma notícia no navegador;<br>
-     2. Ativa a extensão instalada;<br>
-  	 3. O usuário clica no botão "Analisar Notícia";<br>
-  	 4. O sistema captura o texto da página e envia para a API;<br>
-     5. O back-end processa o conteúdo e compara com o banco vetorial;<br>
-     6. O sistema retorna se a notícia é considerada falsa ou verdadeira.<br>
-</details>
+## Estrutura do projeto
 
-## Funcionalidades do Projeto
-- Análise automática de notícias diretamente na aba ativa do navegador;
-- Extração do título e do conteúdo da página atual;
-- Envio do texto para processamento no back-end;
-- Comparação com base vetorial treinada;
-- Classificação da notícia como falsa ou verdadeira;
-- Exibição do resultado em uma interface simples e intuitiva;
-- Suporte para uso em extensão do navegador Google Chrome.
+| Caminho | Papel |
+| --- | --- |
+| `Front-end/` | Extensão Chrome. `main.js` é executado; `main.ts` documenta contratos tipados; `manifest.json` configura o popup. |
+| `Back-end/main.py` | API FastAPI, integração do classificador, Google Fact Check e Ollama. |
+| `Back-end/classificador_veracidade.py` | TF-IDF, regressão logística, calibração e abstenção. |
+| `Back-end/treinar_classificador.py` | Split 70/30, balanceamento do treino, métricas e geração do modelo. |
+| `Back-end/fact_check_google.py` | Cliente da API Google Fact Check Tools. |
+| `Back-end/test_fact_check_google.py` | Testes simulados da integração Google. |
+| `Tratamento-dados/tratamento_datasets_rotulados.ipynb` | Lê e valida TXT e gera CSV de treino e auditoria. |
+| `Tratamento-dados/tratamento_fakeNewsFinal.ipynb` | EDA textual dos mesmos TXT rotulados. |
+| `datasets/fake/*.txt` | Exemplos rotulados como FALSA pela pasta de origem. |
+| `datasets/true/*.txt` | Exemplos rotulados como VERDADEIRA pela pasta de origem. |
+| `datasets/tratados/` | CSVs tratados, auditados e saídas de treino. |
+| `requirements.txt` | Dependências Python do backend. |
 
-## Demonstração
-<img width="780" height="496" alt="fakenews3" src="https://github.com/user-attachments/assets/6451cde8-fb00-4b12-9184-c3e7781f0f6b" /><br>
-URL: https://ge.globo.com/futebol/times/flamengo/noticia/2026/09/19/escalacao-do-flamengo-jardim-fara-mudancas-na-equipe-para-enfrentar-o-bragantino.ghtml
+**Observação**: Não há mais dependência do `Historico_de_materias.csv`, dos CSVs originais
+antigos nem de um acervo sem rótulos para busca local. A API Google é externa e
+opcional; os TXT locais são fonte de treino / EDA, não evidências atuais.
 
-## Arquitetura do Projeto
-O sistema é dividido em três partes principais:
-- Front-end: extensão do navegador responsável pela interface e captura do conteúdo.
-- Back-end: API em Python que processa as informações do texto.
-- Banco vetorial: estrutura de dados que armazena e compara o significado e o contexto das notícias.
+## Dados, limpeza e rótulos
 
-## Tecnologias Utilizadas
+As pastas atuais contêm aproximadamente 1.000 TXT em `fake/` e 821 em `true/`
+(contagens do checkout documentado; confirme após atualizar os dados). <br><br>
+O pipeline é:
 
-- `HTML`: estrutura da interface gráfica da extensão.
-- `CSS`: estilização visual da página e do popup.
-- `JavaScript`: lógica do cliente e integração com o navegador.
-  - `TypeScript`: tipagem estática para maior organização e segurança do código.
-- `JavaScript Object Notation (JSON)`: armazenamento e transporte de dados estrutudados.
+1. `tratamento_datasets_rotulados.ipynb` lê os TXT em UTF-8. A pasta determina
+   os rótulos (`fake = 1`, `true = 0`); nenhuma classe é deduzida do conteúdo.
+2. O processamento mantém pontuação, caixa, negações e stopwords. Para
+   `texto_modelo`, apenas espaços são normalizados. Textos curtos ou com erro de
+   encoding são apontados explicitamente.
+3. Textos iguais após conversão para minúsculas são tratados como duplicatas
+   dentro da mesma classe. Se aparecerem nas duas classes, são sinalizados e
+   impedem o treino até revisão. O CSV de auditoria registra as contagens.
+4. O CSV tratado guarda também `arquivo_origem`, que é somente um caminho
+   relativo para rastrear o TXT. As fontes não fornecem URL, data ou publicador.
+5. `tratamento_fakeNewsFinal.ipynb` faz EDA das duas classes. Limpeza adicional
+   para gráficos não substitui o texto preservado usado pelo classificador.
 
-## Estrutura do Repositório 
-```text
-Projeto-FakeNews/
-├── Back-end/
-│   ├── main.py
-│   ├── treinar_ia.py
-│   ├── base_noticias.json
-│   └── meu_banco_vetorial/
-├── Front-end/
-│   ├── index.html
-│   ├── main.js
-│   ├── main.ts
-│   ├── style.css
-│   ├── manifest.json
-│   └── tsconfig.json
-├── datasets/
-│   ├── fake.csv
-│   ├── FakenewsBR_factchecked.csv
-└── └── real.csv
+É importante revisar a procedência dos rótulos antes de treinar. A pasta é uma codificação
+prática, não comprovação de que cada notícia foi rotulada corretamente.
+
+### O que acontece com o teste 70/30
+
+`Back-end/treinar_classificador.py` cria a divisão estratificada e agrupada
+antes de balancear os dados:
+
+- Cerca de **70%** ficam no treino e **30%** no teste;
+- Textos iguais após conversão para minúsculas permanecem na mesma partição;
+- Apenas o treino passa por balanceamento temático;
+- O teste não é replicado, então suas métricas refletem a distribuição
+  existente;
+- O modelo de produção é ajustado com todos os dados após a avaliação;
+- O relatório de teste usado pela API é salvo em
+  `Back-end/metricas_veracidade.json`.
+
+Como os TXT não trazem URL nem identificador de alegação, paráfrases relacionadas
+ainda podem aparecer em treino e teste. Para uma avaliação mais rigorosa,
+recupere identificadores de alegações/fontes e agrupe-os antes da divisão.
+É recomendado também avaliar notícias recentes rotuladas por revisão editorial independente.
+
+## Classificador e estimativas
+
+O classificador **não é um modelo generativo**. Ele usa:
+
+- Vetorização TF-IDF de unigramas e bigramas;
+- Regressão logística com pesos balanceados;
+- Calibração Platt com previsões agrupadas fora da amostra;
+- Abstenção quando confiança ou similaridade com os exemplos de treino ficam
+  abaixo dos limites definidos.
+
+O dataset contém apenas `VERDADEIRA` e `FALSA`. A interface pode descrever
+tendências moderadas ou fortes a partir das probabilidades, mas não declara resultados intermediários. `INCERTO` indica que o sistema se absteve; não
+é uma terceira classe aprendida. A avaliação textual da API Google é exibida
+separadamente.
+
+## Instalação no Windows
+
+Ops! Tópico ainda em fase de teste...
+
+## Iniciar a API
+
+```powershell
+python .\Back-end\main.py
 ```
 
-## Pré-requisitos
-Antes de executar o projeto, certifique-se de ter:
-- Python 3.10 ou superior
-- Navegador Google Chrome
-- Dependências Python do projeto instaladas
+A API local fica em `http://127.0.0.1:8000`.
 
-## Como Rodar
-**Passo 1 - Preparar o ambiente**
-Abra o terminal do diretório do projeto e execute:
-```bash
-cd "C:\Códigos IA\Projeto-FakeNews"
+- `POST /verificar`: recebe o texto integral da notícia e, opcionalmente, o
+  título/início do artigo para classificação;
+- `POST /feedback`: recebe avaliação do resultado e grava uma linha em
+  `Back-end/feedback_noticias.jsonl`. Feedback não retreina o classificador.
+
+O backend não pesquisa um acervo local. As checagens externas são obtidas pelo
+Google Fact Check Tools quando configurado, e são separadas da saída
+probabilística local.
+
+## Google Fact Check Tools API (opcional)
+
+Configure um projeto Google Cloud com a API habilitada e defina a chave somente
+no ambiente do processo:
+
+```powershell
+$env:GOOGLE_FACT_CHECK_API_KEY = "SUA-CHAVE"
+python .\Back-end\main.py
 ```
 
-**Passo 2 - Treinar a base vetorial**
-Execute o comando abaixo:
-```bash
-& "C:\Python\python.exe" ".\Back-end\treinar_ia.py"
+Tenha atenção com a segurança da chave gerada. Em último caso, ela poderá ser adicionada 
+em um arquivo `.env`. O backend envia ao Google um campo `Título` com o resumo do
+Ollama, quando disponível; se a geração falhar, usa até 150 caracteres do texto
+de classificação. As quebras de linha são removidas antes da consulta. Os
+resultados são checagens previamente publicadas, podem não corresponder ao
+contexto da matéria aberta e não alimentam automaticamente o treino.
+
+## Resumo Ollama (opcional)
+
+Instale Ollama e baixe o modelo padrão:
+
+```powershell
+ollama pull llama3.2:1b
 ```
-Esse passo recria a base de dados vetorial e prepara os embeddings para análise.
 
-**Passo 3 - Iniciar o servidor back-end**
-Abra outro terminal e execute:
-  ```bash
-  cd "C:\Códigos IA\Projeto-FakeNews"
-  & "C:\Python\python.exe" ".\Back-end\main.py"
-  ```
-O servidor deve continuar em execução durante o uso da extensão.
+O backend usa por padrão `http://127.0.0.1:11434` e `llama3.2:1b`. As variáveis
+`OLLAMA_URL` e `OLLAMA_MODEL` permitem alterar essas configurações. Por sua vez, o resumo 
+é uma descrição da alegação e não decide sua veracidade.
 
-**Passo 4 - Carregar a extensão no navegador**
-1. Acesse o site `chrome://extensions/`
-2. Ative o modo desenvolvedor
-3. Clique em "Carregar sem compactação"
-4. Selecione a pasta `Front-end`
+## Carregar a extensão
 
-## Benefícios do Projeto
-- Ajuda a combater a disseminação de notícias falsas
-- Facilita a verificação rápida de conteúdo online
-- Pode ser expandido para novos modelos e bases de dados
-- Funciona como uma ferramenta prática de apoio à informação
+1. Inicie a API e deixe-a rodando.
+2. No Chrome, abra `chrome://extensions/` e ative **Modo do desenvolvedor**.
+3. Clique em **Carregar sem compactação** e escolha `Front-end/`.
+4. Abra uma página de notícia e clique no ícone da extensão.
 
-## Melhorias Futuras
-- Adicionar suporte a mais navegadores
-- Melhorar a interface visual da extensão
-- Testar em redes sociais
-- Adicionar filtro de palavras nos textos capturados.
+O popup carrega `Front-end/main.js`; `main.ts` é uma referência tipada e não é
+compilado. `Front-end/README.md` documenta o fluxo JS/TS/JSON e como manter as
+URLs e permissões alinhadas.
+
