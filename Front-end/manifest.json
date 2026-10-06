@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Verificador de Fake News de Esportes",
+  "name": "Verificador de Fake News",
   "version": "1.0",
-  "description": "Verifica a veracidade de notícias esportivas brasileiras usando IA.",
+  "description": "Verifica a veracidade de notícias usando IA.",
   "permissions": [
     "activeTab",
     "scripting"
@@ -11,6 +11,12 @@
     "http://localhost:8000/*" 
   ],
   "action": {
-    "default_popup": "index.html"
+    "default_popup": "index.html",
+    "default_icon": {
+      "32": "img/icon32.png"
+    }
+  },
+  "icons": {
+    "32": "img/icon32.png"
   }
 }
