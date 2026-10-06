@@ -1,0 +1,312 @@
+{
+  "criado_em": "2026-10-06T02:25:39.005735+00:00",
+  "modelo": "TF-IDF (unigramas e bigramas) + regressão logística; calibração Platt com validação agrupada",
+  "versao_sklearn": "1.9.1",
+  "semente": 42,
+  "divisao": {
+    "metodo": "StratifiedGroupKFold",
+    "grupos": "texto_modelo convertido para minúsculas",
+    "particoes": 10,
+    "particoes_teste": 3,
+    "proporcao_teste_planejada": 0.3,
+    "proporcao_teste_real": 0.300384404173531,
+    "registros_dataset_original": 1821,
+    "registros_treino_original": 1274,
+    "registros_treino_balanceado": 1148,
+    "registros_teste": 547,
+    "arquivos_treino": 1274,
+    "arquivos_teste": 547,
+    "grupos_treino_original": 1274,
+    "grupos_treino_balanceado": 1148,
+    "grupos_teste": 547
+  },
+  "contagem_classes_dataset": {
+    "FALSA": 1000,
+    "VERDADEIRA": 821
+  },
+  "sha256_dataset_balanceado": "c9870c01a526cf3503574a3ac3aad7c6d9b4ac52c5503209d235503206968f80",
+  "balanceamento_tematica": {
+    "metodo": "MiniBatchKMeans em TF-IDF de unigramas e bigramas",
+    "quantidade_grupos": 30,
+    "amostragem_falsas": "quota aproximadamente uniforme por grupo temático",
+    "verdadeiras_utilizadas": 821,
+    "falsas_selecionadas": 821,
+    "falsas_preservadas_para_eda": 179,
+    "falsas_preservadas_para_eda_no_treino": 126,
+    "distribuicao_por_tema": [
+      {
+        "tema_cluster": 0,
+        "termos_representativos": "previdência, reforma, reforma previdência, arthur, manifestantes",
+        "verdadeiras": 14,
+        "falsas": 6
+      },
+      {
+        "tema_cluster": 1,
+        "termos_representativos": "projeto, senado, renan, foro, pec",
+        "verdadeiras": 16,
+        "falsas": 48
+      },
+      {
+        "tema_cluster": 2,
+        "termos_representativos": "lula, moro, juiz, sérgio moro, ex presidente",
+        "verdadeiras": 44,
+        "falsas": 47
+      },
+      {
+        "tema_cluster": 3,
+        "termos_representativos": "moro, lula, lava, lava jato, jato",
+        "verdadeiras": 29,
+        "falsas": 40
+      },
+      {
+        "tema_cluster": 4,
+        "termos_representativos": "culto, valdemiro, igreja, durante culto, santiago",
+        "verdadeiras": 7,
+        "falsas": 16
+      },
+      {
+        "tema_cluster": 5,
+        "termos_representativos": "renan, senado, renan calheiros, calheiros, marco aurélio",
+        "verdadeiras": 15,
+        "falsas": 10
+      },
+      {
+        "tema_cluster": 6,
+        "termos_representativos": "cármen, cármen lúcia, lúcia, ministra, presidente stf",
+        "verdadeiras": 9,
+        "falsas": 8
+      },
+      {
+        "tema_cluster": 7,
+        "termos_representativos": "eldorado, clique, clique aqui, ouvir, comentário",
+        "verdadeiras": 14,
+        "falsas": 0
+      },
+      {
+        "tema_cluster": 8,
+        "termos_representativos": "norte, trump, eua, coreia, nuclear",
+        "verdadeiras": 16,
+        "falsas": 50
+      },
+      {
+        "tema_cluster": 9,
+        "termos_representativos": "prisão, federal, eike, polícia, pf",
+        "verdadeiras": 49,
+        "falsas": 30
+      },
+      {
+        "tema_cluster": 10,
+        "termos_representativos": "armadas, forças, forças armadas, militares, segurança",
+        "verdadeiras": 5,
+        "falsas": 13
+      },
+      {
+        "tema_cluster": 11,
+        "termos_representativos": "prefeito, doria, presidência, dória, psdb",
+        "verdadeiras": 6,
+        "falsas": 4
+      },
+      {
+        "tema_cluster": 12,
+        "termos_representativos": "marisa, ex primeira, marisa letícia, letícia, dama",
+        "verdadeiras": 12,
+        "falsas": 20
+      },
+      {
+        "tema_cluster": 13,
+        "termos_representativos": "dia bem, bem informado, estão principais, aqui estão, principais notícias",
+        "verdadeiras": 26,
+        "falsas": 0
+      },
+      {
+        "tema_cluster": 14,
+        "termos_representativos": "grande norte, rio grande, rio, policiais, grande",
+        "verdadeiras": 13,
+        "falsas": 16
+      },
+      {
+        "tema_cluster": 15,
+        "termos_representativos": "odebrecht, temer, presidente, ex, jato",
+        "verdadeiras": 66,
+        "falsas": 121
+      },
+      {
+        "tema_cluster": 16,
+        "termos_representativos": "bolsonaro, jair, deputado, jair bolsonaro, psc",
+        "verdadeiras": 12,
+        "falsas": 19
+      },
+      {
+        "tema_cluster": 17,
+        "termos_representativos": "anos, brasil, está, são, país",
+        "verdadeiras": 273,
+        "falsas": 174
+      },
+      {
+        "tema_cluster": 18,
+        "termos_representativos": "tse, chapa, eleitoral, dilma temer, chapa dilma",
+        "verdadeiras": 17,
+        "falsas": 14
+      },
+      {
+        "tema_cluster": 19,
+        "termos_representativos": "aécio, joesley, neves, aécio neves, joesley batista",
+        "verdadeiras": 17,
+        "falsas": 60
+      },
+      {
+        "tema_cluster": 20,
+        "termos_representativos": "fachin, stf, edson fachin, edson, supremo",
+        "verdadeiras": 38,
+        "falsas": 13
+      },
+      {
+        "tema_cluster": 21,
+        "termos_representativos": "sucesso, pcc, redes sociais, redes, sociais",
+        "verdadeiras": 8,
+        "falsas": 15
+      },
+      {
+        "tema_cluster": 22,
+        "termos_representativos": "palocci, lula, kátia, ex, ex presidente",
+        "verdadeiras": 14,
+        "falsas": 10
+      },
+      {
+        "tema_cluster": 23,
+        "termos_representativos": "victor, poliana, cantor, mulher, chaves",
+        "verdadeiras": 7,
+        "falsas": 6
+      },
+      {
+        "tema_cluster": 24,
+        "termos_representativos": "teori, zavascki, teori zavascki, avião, ministro",
+        "verdadeiras": 13,
+        "falsas": 22
+      },
+      {
+        "tema_cluster": 25,
+        "termos_representativos": "síria, ataque, assad, eua, ataque químico",
+        "verdadeiras": 12,
+        "falsas": 12
+      },
+      {
+        "tema_cluster": 26,
+        "termos_representativos": "coreia, norte, coreia norte, kim, míssil",
+        "verdadeiras": 40,
+        "falsas": 19
+      },
+      {
+        "tema_cluster": 27,
+        "termos_representativos": "lula, ex, ex presidente, presidente, petista",
+        "verdadeiras": 10,
+        "falsas": 7
+      },
+      {
+        "tema_cluster": 28,
+        "termos_representativos": "avião, aeronave, piloto, acidente, helicóptero",
+        "verdadeiras": 8,
+        "falsas": 13
+      },
+      {
+        "tema_cluster": 29,
+        "termos_representativos": "carne, jbs, empresas, empresa, negócios",
+        "verdadeiras": 11,
+        "falsas": 8
+      }
+    ]
+  },
+  "metricas_teste": {
+    "acuracia": 0.8994515539305301,
+    "acuracia_balanceada": 0.896889338731444,
+    "brier_score": 0.07659605716563556,
+    "limiar_sugestao_falsa": 0.5042828152067932,
+    "matriz_confusao_labels_0_1": [
+      [
+        215,
+        32
+      ],
+      [
+        23,
+        277
+      ]
+    ],
+    "relatorio_por_classe": {
+      "VERDADEIRA": {
+        "precision": 0.9033613445378151,
+        "recall": 0.8704453441295547,
+        "f1-score": 0.8865979381443299,
+        "support": 247.0
+      },
+      "FALSA": {
+        "precision": 0.8964401294498382,
+        "recall": 0.9233333333333333,
+        "f1-score": 0.909688013136289,
+        "support": 300.0
+      },
+      "accuracy": 0.8994515539305301,
+      "macro avg": {
+        "precision": 0.8999007369938267,
+        "recall": 0.896889338731444,
+        "f1-score": 0.8981429756403094,
+        "support": 547.0
+      },
+      "weighted avg": {
+        "precision": 0.8995654313268588,
+        "recall": 0.8994515539305301,
+        "f1-score": 0.8992615990174336,
+        "support": 547.0
+      }
+    },
+    "avaliacao_com_abstencao": {
+      "limiar_confianca_minima": 0.7,
+      "limiar_similaridade_minima": 0.16,
+      "cobertura": 0.45521023765996343,
+      "taxa_indeterminada": 0.5447897623400365,
+      "acuracia_balanceada_nos_classificados": 0.9478587139345322,
+      "falsas_previstas_em_verdadeiras": 6,
+      "taxa_falsas_previstas_em_verdadeiras": 0.024291497975708502,
+      "matriz_confusao_labels_0_1": [
+        [
+          112,
+          6
+        ],
+        [
+          7,
+          124
+        ]
+      ],
+      "relatorio_por_classe": {
+        "VERDADEIRA": {
+          "precision": 0.9411764705882353,
+          "recall": 0.9491525423728814,
+          "f1-score": 0.9451476793248945,
+          "support": 118.0
+        },
+        "FALSA": {
+          "precision": 0.9538461538461539,
+          "recall": 0.9465648854961832,
+          "f1-score": 0.9501915708812261,
+          "support": 131.0
+        },
+        "accuracy": 0.9477911646586346,
+        "macro avg": {
+          "precision": 0.9475113122171945,
+          "recall": 0.9478587139345322,
+          "f1-score": 0.9476696251030603,
+          "support": 249.0
+        },
+        "weighted avg": {
+          "precision": 0.9478420469207145,
+          "recall": 0.9477911646586346,
+          "f1-score": 0.9478012929549324,
+          "support": 249.0
+        }
+      },
+      "similaridade_media_maxima": 0.1994908909037668,
+      "confianca_media": 0.8877148326531147
+    }
+  },
+  "observacao": "A partição de teste é formada antes do balanceamento temático e permanece sem reamostragem. As métricas são agrupadas por texto igual após conversão para minúsculas; os TXT não fornecem URL ou fonte editorial para agrupamento adicional. O limiar foi selecionado apenas nos dados de treino para maximizar a acurácia balanceada. As probabilidades calibradas não comprovam veracidade. A avaliação com abstinência exige confiança mínima e similaridade mínima com o treino; textos fora desses limites são retornados como INCERTOS. O dataset não contém a classe INCERTA.",
+  "limiar_sugestao_falsa_modelo_final": 0.5282867767531677
+}
