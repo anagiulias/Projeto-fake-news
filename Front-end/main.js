@@ -313,32 +313,55 @@ function renderizarResultado(resultadoDiv, dados, textoAnalisado) {
     resultadoDiv.append(secaoGoogle);
   }
 
-  // Exibe apenas os critérios de identificação relevantes para o popup.
-  // Sinais textuais adicionais continuam disponíveis na resposta completa do back-end.
-  const criterios = document.createElement('section');
-  const tituloCriterios = document.createElement('h5');
-  tituloCriterios.textContent = 'Critérios avaliados';
-  criterios.append(tituloCriterios);
-  const listaCriterios = document.createElement('ul');
-  // Converte os nomes do back-end para rótulos curtos e normaliza campos ausentes.
+  // =========================================================================
+  // CRITÉRIOS AVALIADOS (RESILIÊNCIA VISUAL ATIVA)
+  // Oculta dinamicamente campos não identificados do DOM em vez de exibir 'Não identificado'.
+  // =========================================================================
   const criteriosDeIdentificacao = {
-    Autor: ['Autor', 'Não identificado'],
-    'Data de publicação': ['Data de publicação', 'Não identificada'],
-    'Fonte/site': ['Fonte', 'Não identificado']
+    Autor: 'Autor',
+    'Data de publicação': 'Data de publicação',
+    'Fonte/site': 'Fonte'
   };
+
+  const listaCriterios = document.createElement('ul');
+  let totalCriteriosExibidos = 0;
+
+  // Helper para validar se o valor retornado não é um texto nulo ou vazio
+  const temValorValido = (val) => {
+    if (!val) return false;
+    const limpo = String(val).trim().toLowerCase();
+    return (
+      limpo !== '' &&
+      !limpo.startsWith('não ') &&
+      !limpo.startsWith('nao ') &&
+      limpo !== 'undefined' &&
+      limpo !== 'null'
+    );
+  };
+
   (dados.criterios || [])
     .filter((criterio) => Object.hasOwn(criteriosDeIdentificacao, criterio.criterio))
     .forEach((criterio) => {
-      const item = document.createElement('li');
-      const [rotulo, valorAusente] = criteriosDeIdentificacao[criterio.criterio];
-      const valor = criterio.avaliacao.toLowerCase().startsWith('não ')
-        ? valorAusente
-        : criterio.explicacao || criterio.avaliacao;
-      item.textContent = `${rotulo}: ${valor}`;
-      listaCriterios.append(item);
+      const valor = criterio.explicacao || criterio.avaliacao;
+      // Só renderiza o <li> se a informação foi de fato identificada na página
+      if (temValorValido(valor)) {
+        const item = document.createElement('li');
+        const rotulo = criteriosDeIdentificacao[criterio.criterio];
+        item.textContent = `${rotulo}: ${valor}`;
+        listaCriterios.append(item);
+        totalCriteriosExibidos++;
+      }
     });
-  criterios.append(listaCriterios);
-  resultadoDiv.append(criterios);
+
+  // Se ao menos um critério foi identificado, adiciona a seção ao DOM; caso contrário, não renderiza nada
+  if (totalCriteriosExibidos > 0) {
+    const criterios = document.createElement('section');
+    const tituloCriterios = document.createElement('h5');
+    tituloCriterios.textContent = 'Critérios avaliados';
+    criterios.append(tituloCriterios);
+    criterios.append(listaCriterios);
+    resultadoDiv.append(criterios);
+  }
 
   // Só apresenta matérias relacionadas se o backend realmente devolver fontes locais.
   const evidencias = dados.evidencias || [];
