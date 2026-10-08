@@ -1,0 +1,5 @@
+,palavras,palavras,palavras,palavras,palavras,palavras,caracteres,caracteres,caracteres,caracteres,caracteres,caracteres
+,count,mean,median,std,min,max,count,mean,median,std,min,max
+classe,,,,,,,,,,,,
+fake,1000,177.49,154.0,100.04,9,732,1000,1072.64,942.5,602.43,56,4520
+true,821,178.13,156.0,96.58,10,732,821,1078.63,952.0,584.99,49,4525
