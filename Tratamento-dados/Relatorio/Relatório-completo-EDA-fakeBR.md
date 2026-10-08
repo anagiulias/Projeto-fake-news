@@ -101,6 +101,8 @@ Há diferença de **179 notícias** entre as classes.
 
 O desequilíbrio global é moderado, mas não informa se cada assunto está representado de maneira equivalente.
 
+<img width="938" height="536" alt="Distribuição das classes" src="https://github.com/user-attachments/assets/e9a1c4ae-8a54-493a-8e1a-1e755b5a4f4f" />
+
 ### Figura 1. Frequência e proporção de notícias por classe
 
 O gráfico apresenta a distribuição absoluta e percentual das duas classes:
@@ -126,6 +128,8 @@ A diferença média foi de **0,64 palavra e 5,99 caracteres**, compatível com a
 
 As amplitudes e dispersões mostram, porém, que ainda existem textos de comprimentos variados; a semelhança entre médias não equivale à identidade das distribuições.
 
+<img width="938" height="352" alt="Distribuição dos comprimentos por classe" src="https://github.com/user-attachments/assets/91d5839e-d5e9-4ab7-86cc-4f5aa1c033f1" />
+
 ### Figura 2. Distribuições de palavras e caracteres por classe (boxplots)
 
 Os boxplots apresentam as distribuições de comprimento das notícias falsas e verdadeiras, considerando:
@@ -134,6 +138,8 @@ Os boxplots apresentam as distribuições de comprimento das notícias falsas e 
 - Número de caracteres.
 
 A visualização foi produzida sem exibir outliers.
+
+<img width="938" height="313" alt="Distribuições de palavras e caracteres por classe" src="https://github.com/user-attachments/assets/f78bc4af-b08f-4bbe-a73a-7e1ffb5fda08" />
 
 ### Figura 3. Histogramas da extensão dos textos
 
@@ -165,11 +171,15 @@ A frequência documental indica em quantos documentos o termo aparece, não o n�
 | resumindo | 21 | 0 |
 | perder | 21 | 0 |
 
+<img width="938" height="335" alt="Vocabulário frequente nas duas classes" src="https://github.com/user-attachments/assets/0e45753b-f4f8-4c45-8e77-abe65844b946" />
+
 ### Figura 4. Vocabulário frequente nas duas classes
 
 O gráfico compara os termos mais frequentes nos textos classificados como falsos e verdadeiros.
 
 A visualização apresenta contagens de ocorrências dos termos em cada classe.
+
+<img width="938" height="335" alt="Termos associados diferencialmente às classes" src="https://github.com/user-attachments/assets/9bd279e5-570c-4a28-8d3a-097381b54f68" />
 
 ### Figura 5. Termos associados diferencialmente às classes
 
@@ -219,17 +229,23 @@ A associação entre cluster e classe apresentou os seguintes resultados:
 
 Esse resultado sustenta a existência de dependência estatística entre os grupos textuais e os rótulos, sem estabelecer causalidade nem comprovar melhoria preditiva.
 
+<img width="938" height="521" alt="Composição das classes por cluster temático" src="https://github.com/user-attachments/assets/16291716-c574-4fc8-ac51-9ef897eeb868" />
+
 ### Figura 6. Distribuição absoluta das classes nos oito clusters exploratórios
 
 O gráfico apresenta a composição absoluta dos oito agrupamentos lexicais, identificados de 0 a 7.
 
 Para cada cluster, são apresentadas as quantidades de notícias falsas e verdadeiras.
 
+<img width="938" height="521" alt="Composição percentual de classes por cluster" src="https://github.com/user-attachments/assets/6cd81b20-3a68-4ca6-a9b2-0a6873f7970e" />
+
 ### Figura 7. Distribuição percentual das classes nos oito clusters exploratórios
 
 O gráfico apresenta a composição percentual das classes em cada agrupamento.
 
 A comparação permite observar a variação da proporção de notícias falsas e verdadeiras entre os diferentes clusters.
+
+<img width="938" height="703" alt="Projeção 2D dos textos" src="https://github.com/user-attachments/assets/c5ce43ff-a6bf-4475-9231-c343ab32ed14" />
 
 ### Figura 8. Projeção exploratória dos textos no espaço de atributos
 
@@ -277,6 +293,8 @@ O conjunto selecionado contém:
 
 O procedimento produziu paridade global entre as classes no conjunto de treinamento selecionado.
 
+<img width="938" height="649" alt="Treino original e selecionado" src="https://github.com/user-attachments/assets/3562c4a2-c889-4110-8a11-51dd692fcca7" />
+
 ### Figura 9. Contagens por cluster no treino antes e depois da amostragem temática
 
 O gráfico compara as contagens de notícias falsas e verdadeiras nos 30 clusters temáticos.
@@ -285,6 +303,8 @@ São apresentadas duas situações:
 
 - Treino original, antes do balanceamento.
 - Treino selecionado, após a aplicação das cotas por cluster.
+
+<img width="938" height="577" alt="Proporções de classes por cluster" src="https://github.com/user-attachments/assets/ab957659-57e1-4d3b-9aaf-c6bc8fe08bd4" />
 
 ### Figura 10. Proporções de classes por cluster no treino antes e depois da amostragem
 
