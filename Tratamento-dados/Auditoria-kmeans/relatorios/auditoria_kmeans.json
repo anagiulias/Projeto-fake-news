@@ -1,0 +1,9 @@
+{
+  "dataset_total": 1821,
+  "treino_antes": 1274,
+  "treino_depois": 1148,
+  "teste_intocado": 547,
+  "falsas_nao_amostradas_treino": 126,
+  "clusters": 30,
+  "observacao": "Amostragem uniforme somente da classe falsa; as verdadeiras são preservadas. Clusters ajustados apenas no treino."
+}
