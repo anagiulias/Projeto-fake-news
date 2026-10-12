@@ -254,9 +254,9 @@ function renderizarResultado(resultadoDiv, dados, textoAnalisado) {
     resultadoDiv.append(probabilidade);
   }
 
-  // Resultados externos são revisões publicadas; o texto do avaliador não vira rótulo local.
+  // Resultados externos são revisões publicadas o texto do avaliador não vira rótulo local.
   const checagensGoogle = dados.checagens_fact_check_google;
-  if (checagensGoogle) {
+  if (checagensGoogle?.resultados?.length) {
     const secaoGoogle = document.createElement('section');
     secaoGoogle.className = 'checagens-google';
     const tituloGoogle = document.createElement('h5');
