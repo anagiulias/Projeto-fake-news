@@ -1,0 +1,57 @@
+# GUIDING ACTIVITY: METODOLOGIA SCRUM E PAPÉIS DO TIME
+**Residência em Inteligência Artificial — Instituto de Pesquisas Eldorado / UnB**
+**Projeto:** Extensão de Apoio à Confiabilidade de Notícias Esportivas com IA (Challenge 1)
+**Grupo 3:** Ivan Vieira, Estêvão Lins, Stenio Ashlen, Hazel de Paula, Luan da Silva, Giulio dos Anjos, Talita Fernandes.
+
+---
+
+## 1. Resumo da Metodologia Scrum (Fundamentação Scrum.org)
+
+O Scrum é um framework leve projetado para ajudar pessoas, equipes e organizações a gerar valor por meio de soluções adaptativas para problemas complexos. Em consonância com a metodologia Challenge-Based Learning (CBL), o Scrum estrutura o ciclo de desenvolvimento em iterações empiricamente orientadas, ancoradas em:
+
+### Os Três Pilares do Empirismo:
+1. **Transparência:** Processos, critérios de avaliação e o progresso do trabalho devem ser visíveis e compreendidos da mesma forma por todos os membros e mentores.
+2. **Inspeção:** Artefatos e o progresso rumo à meta da Sprint devem ser avaliados com frequência para identificar desvios indesejados.
+3. **Adaptação:** Ajuste imediato do processo, escopo ou premissas técnicas caso desvios sejam detectados na inspeção.
+
+### Eventos e Cadência do Projeto:
+* **Sprint:** Ciclos semanais e quinzenais alinhados às fases do CBL (Engage, Investigate, Act, Showcase).
+* **Sprint Planning:** Alinhamento inicial de cada fase para decompor as metas em tarefas executáveis no backlog.
+* **Daily Scrum (Alinhamentos Rápidos):** Inspeção diária síncrona/assíncrona de impedimentos e progresso em relação à meta do desafio.
+* **Sprint Review & Retrospective:** Apresentação dos entregáveis ao mentor e autoavaliação das práticas de trabalho da equipe.
+
+---
+
+## 2. Estrutura do Scrum Team e Atribuição de Papéis
+
+Segundo a especificação do Scrum.org, não existem hierarquias dentro de um Scrum Team; trata-se de uma unidade coesa de profissionais focados em um único objetivo. No entanto, as responsabilidades são claramente segregadas:
+
+### 2.1 Product Owner (PO)
+* **Responsável:** HAZEL
+* **Atribuições:**
+  * Maximizar o valor do produto resultante do trabalho do time.
+  * Gerenciar o Product Backlog (criação, clareza dos itens e ordenação por prioridade).
+  * Manter a interlocução direta com stakeholders externos e com os mentores da residência.
+  * Assegurar que o escopo (desinformação, português, extensão web) seja rigorosamente respeitado.
+
+### 2.2 Scrum Master (SM)
+* **Responsável:** IVAN
+* **Atribuições:**
+  * Garantir a eficácia da equipe segundo as práticas do Scrum e do CBL.
+  * Facilitar os rituais (Planning, Dailys, Retrospectivas) e assegurar a pontualidade das entregas acadêmicas e técnicas.
+  * Atuar ativamente na remoção de bloqueios operacionais e metodológicos que travem o avanço dos membros.
+  * Padronizar a documentação institucional e garantir conformidade com as diretrizes da UnB e do Instituto Eldorado.
+
+### 2.3 Developers (Time Multidisciplinar de Pesquisa e Engenharia)
+Composto por especialistas com responsabilidades multifuncionais compartilhadas:
+
+* ** ESTEVAO (Engenharia de Backend & Arquitetura de Dados / IA):**
+  * Responsável pela modelagem do fluxo de RAG, integração do banco de dados vetorial, estratégias de chunking e pipelines de busca semântica em Python.
+* ** LUAN (Engenharia de PLN, Extração de Dados e QA):**
+  * Responsável pelo benchmarking de modelos de linguagem (Sentence Transformers / BERTimbau), análise de datasets públicos e extração de legendas do YouTube/sites.
+* ** GIU (Desenvolvimento da Extensão & Interface UX):**
+  * Responsável pela construção da extensão de navegador (JavaScript/TypeScript), captura de DOM das notícias e exibição dos alertas não punitivos ao usuário.
+* ** TALITA (Análise Forense & Curadoria de Dados Esportivos):**
+  * Responsável pela curadoria da base de conhecimento confiável (súmulas, comunicados de clubes, checagens factuais esportivas) e engenharia de prompts/regras.
+* ** STENIO (Qualidade, Métricas de Confiabilidade & Avaliação Ética):**
+  * Responsável pela operacionalização da Matriz de Confiança, definição dos critérios de pontuação da rubrica e auditoria contra vieses e reatância psicológica.
