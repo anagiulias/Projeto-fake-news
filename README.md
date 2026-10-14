@@ -72,7 +72,7 @@ antes de balancear os dados:
 
 Como os TXT não trazem URL nem identificador de alegação, paráfrases relacionadas
 ainda podem aparecer em treino e teste. Para uma avaliação mais rigorosa, é preciso
-recuperar identificadores de alegações/fontes e agrupe-los antes da divisão.
+recuperar identificadores de alegações/fontes e agrupá-los antes da divisão.
 Avalie também notícias recentes rotuladas por revisão editorial independente.
 
 ## Classificador e estimativas 🔍
@@ -90,8 +90,6 @@ tendências moderadas ou fortes a partir das probabilidades, mas não declara
 “parcialmente verdadeira/falsa”. `INCERTO` indica que o sistema se absteve, não
 é uma terceira classe aprendida. A avaliação textual da API Google é exibida
 separadamente.
-
-<kbd><b>PARTE 1</b></kbd>
 
 ## Passo a passo para executar no Windows 💻
 
@@ -157,20 +155,20 @@ publicadas na internet e não é uma biblioteca para instalar.
 Para configurá-la:
 
 I. Acesse o [Google Cloud Console](https://console.cloud.google.com/) e entre
-   com sua conta Google.
+   com sua conta Google. <br>
 II. Crie um projeto ou selecione um projeto existente pelo seletor de projetos,
-   na barra superior.
+   na barra superior. <br>
 III. Abra **APIs e serviços > Biblioteca**, procure por **Fact Check Tools API**
    e clique em **Ativar**. Também é possível abrir diretamente a
-   [página da API](https://console.cloud.google.com/marketplace/product/google/factchecktools.googleapis.com).
+   [página da API](https://console.cloud.google.com/marketplace/product/google/factchecktools.googleapis.com). <br>
 IV. Depois de ativar a API, abra **APIs e serviços > Credenciais** e clique em
-   **Criar credenciais > Chave de API** copie a chave gerada.
+   **Criar credenciais > Chave de API** copie a chave gerada. <br>
 V. Nas configurações dessa chave, restrinja o uso à **Fact Check Tools API**
    em **Restrições de API**. Restrições de aplicativo podem impedir chamadas feitas
    pelo back-end local, então apenas configure se souber
    qual restrição é compatível com o ambiente em que executará a API. Além disso, o Google
    Cloud pode solicitar configurações adicionais para o projeto antes de
-   habilitar a API.
+   habilitar a API. <br>
 VI. No PowerShell em que iniciará o back-end, defina a variável de ambiente,
    substituindo o texto de exemplo pela chave copiada:
 
@@ -178,8 +176,9 @@ VI. No PowerShell em que iniciará o back-end, defina a variável de ambiente,
 $env:GOOGLE_FACT_CHECK_API_KEY = "SUA_CHAVE_AQUI"
 ```
 
-Essa variável vale apenas para a sessão atual do PowerShell. Inicie ou reinicie
-o back-end nesse mesmo terminal para que ele receba a chave:
+Essa variável vale apenas para a sessão atual do PowerShell.
+<br> Inicie ou reinicie o back-end nesse mesmo terminal 
+para que ele receba a chave:
 
 ```powershell
 python .\Back-end\main.py
